@@ -1,0 +1,26 @@
+﻿@model EncuestasCandidatosv2.Party
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Party</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NA_Party)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NA_Party)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Party }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

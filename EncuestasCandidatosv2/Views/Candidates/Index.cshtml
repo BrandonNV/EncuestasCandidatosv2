@@ -1,0 +1,99 @@
+﻿@model IEnumerable<EncuestasCandidatosv2.Candidate>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_MothersMaidenName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DA_Birth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_Sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NU_SocialSecurity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_Education)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_Religion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_Ethnicity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NA_ActualPosition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Party.NA_Party)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_MothersMaidenName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DA_Birth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_Sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NU_SocialSecurity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_Education)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_Religion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_Ethnicity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NA_ActualPosition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Party.NA_Party)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Candidate }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Candidate }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Candidate })
+        </td>
+    </tr>
+}
+
+</table>

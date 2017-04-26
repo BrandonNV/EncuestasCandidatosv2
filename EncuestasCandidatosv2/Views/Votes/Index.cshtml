@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EncuestasCandidatosv2.Vote>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DOC_VoteForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Candidate.NA_FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Place.NA_State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position.NA_Position)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOC_VoteForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Candidate.NA_FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Place.NA_State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position.NA_Position)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Vote }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Vote }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Vote })
+        </td>
+    </tr>
+}
+
+</table>

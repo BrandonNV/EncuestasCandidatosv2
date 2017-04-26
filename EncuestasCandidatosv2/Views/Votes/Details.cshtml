@@ -1,0 +1,50 @@
+﻿@model EncuestasCandidatosv2.Vote
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DOC_VoteForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOC_VoteForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Candidate.NA_FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Candidate.NA_FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place.NA_State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place.NA_State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position.NA_Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position.NA_Position)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Vote }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

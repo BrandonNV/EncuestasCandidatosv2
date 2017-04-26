@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CANDIDATE1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="ID_Candidate" />
+          </Key>
+          <Property Name="ID_Candidate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NA_FirstName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="NA_LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NA_MothersMaidenName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DA_Birth" Type="date" Nullable="false" />
+          <Property Name="NA_Sex" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NA_Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NU_SocialSecurity" Type="int" Nullable="false" />
+          <Property Name="NA_Education" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NA_Religion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NA_Ethnicity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NA_ActualPosition" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Party" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID_Party" />
+          </Key>
+          <Property Name="ID_Party" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NA_Party" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NA_State" Type="varchar" MaxLength="50" />
+          <Property Name="NA_City" Type="varchar" MaxLength="50" />
+          <Property Name="NA_Region" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_Position" />
+          </Key>
+          <Property Name="ID_Position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NA_Position" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="ID_Vote" />
+          </Key>
+          <Property Name="ID_Vote" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Candidate" Type="int" Nullable="false" />
+          <Property Name="ID_Place" Type="int" Nullable="false" />
+          <Property Name="ID_Position" Type="int" Nullable="false" />
+          <Property Name="DOC_VoteForm" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Candidate_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID_Party" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="ID_Party" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="ID_Candidate" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Candidate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Place">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CANDIDATE1ModelStoreContainer">
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Party" EntityType="Self.Party" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vote" EntityType="Self.Vote" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Candidate_Party" Association="Self.FK_Candidate_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Candidate" Association="Self.FK_Vote_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Place" Association="Self.FK_Vote_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Position" Association="Self.FK_Vote_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CANDIDATE1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="ID_Candidate" />
+          </Key>
+          <Property Name="ID_Candidate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NA_FirstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="NA_LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NA_MothersMaidenName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DA_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NA_Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NA_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NU_SocialSecurity" Type="Int32" Nullable="false" />
+          <Property Name="NA_Education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NA_Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NA_Ethnicity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NA_ActualPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Party" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_Candidate_Party" FromRole="Candidate" ToRole="Party" />
+          <NavigationProperty Name="Vote" Relationship="Self.FK_Vote_Candidate" FromRole="Candidate" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID_Party" />
+          </Key>
+          <Property Name="ID_Party" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NA_Party" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_Candidate_Party" FromRole="Party" ToRole="Candidate" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NA_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NA_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NA_Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vote" Relationship="Self.FK_Vote_Place" FromRole="Place" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_Position" />
+          </Key>
+          <Property Name="ID_Position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NA_Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vote" Relationship="Self.FK_Vote_Position" FromRole="Position" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="ID_Vote" />
+          </Key>
+          <Property Name="ID_Vote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Candidate" Type="Int32" Nullable="false" />
+          <Property Name="ID_Place" Type="Int32" Nullable="false" />
+          <Property Name="ID_Position" Type="Int32" Nullable="false" />
+          <Property Name="DOC_VoteForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_Vote_Candidate" FromRole="Vote" ToRole="Candidate" />
+          <NavigationProperty Name="Place" Relationship="Self.FK_Vote_Place" FromRole="Vote" ToRole="Place" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Vote_Position" FromRole="Vote" ToRole="Position" />
+        </EntityType>
+        <Association Name="FK_Candidate_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID_Party" />
+            </Principal>
+            <Dependent Role="Candidate">
+              <PropertyRef Name="ID_Party" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="ID_Candidate" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Candidate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Place">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_Position" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="ID_Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CANDIDATE1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" />
+          <EntitySet Name="Party" EntityType="Self.Party" />
+          <EntitySet Name="Place" EntityType="Self.Place" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Vote" EntityType="Self.Vote" />
+          <AssociationSet Name="FK_Candidate_Party" Association="Self.FK_Candidate_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="Candidate" EntitySet="Candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Candidate" Association="Self.FK_Vote_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Place" Association="Self.FK_Vote_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Position" Association="Self.FK_Vote_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CANDIDATE1ModelStoreContainer" CdmEntityContainer="CANDIDATE1Entities">
+          <EntitySetMapping Name="Candidate">
+            <EntityTypeMapping TypeName="CANDIDATE1Model.Candidate">
+              <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="ID_Candidate" ColumnName="ID_Candidate" />
+                <ScalarProperty Name="NA_FirstName" ColumnName="NA_FirstName" />
+                <ScalarProperty Name="NA_LastName" ColumnName="NA_LastName" />
+                <ScalarProperty Name="NA_MothersMaidenName" ColumnName="NA_MothersMaidenName" />
+                <ScalarProperty Name="DA_Birth" ColumnName="DA_Birth" />
+                <ScalarProperty Name="NA_Sex" ColumnName="NA_Sex" />
+                <ScalarProperty Name="NA_Address" ColumnName="NA_Address" />
+                <ScalarProperty Name="NU_SocialSecurity" ColumnName="NU_SocialSecurity" />
+                <ScalarProperty Name="NA_Education" ColumnName="NA_Education" />
+                <ScalarProperty Name="NA_Religion" ColumnName="NA_Religion" />
+                <ScalarProperty Name="NA_Ethnicity" ColumnName="NA_Ethnicity" />
+                <ScalarProperty Name="NA_ActualPosition" ColumnName="NA_ActualPosition" />
+                <ScalarProperty Name="ID_Party" ColumnName="ID_Party" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Party">
+            <EntityTypeMapping TypeName="CANDIDATE1Model.Party">
+              <MappingFragment StoreEntitySet="Party">
+                <ScalarProperty Name="ID_Party" ColumnName="ID_Party" />
+                <ScalarProperty Name="NA_Party" ColumnName="NA_Party" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Place">
+            <EntityTypeMapping TypeName="CANDIDATE1Model.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="ID_Place" ColumnName="ID_Place" />
+                <ScalarProperty Name="NA_State" ColumnName="NA_State" />
+                <ScalarProperty Name="NA_City" ColumnName="NA_City" />
+                <ScalarProperty Name="NA_Region" ColumnName="NA_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="CANDIDATE1Model.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
+                <ScalarProperty Name="NA_Position" ColumnName="NA_Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vote">
+            <EntityTypeMapping TypeName="CANDIDATE1Model.Vote">
+              <MappingFragment StoreEntitySet="Vote">
+                <ScalarProperty Name="ID_Vote" ColumnName="ID_Vote" />
+                <ScalarProperty Name="ID_Candidate" ColumnName="ID_Candidate" />
+                <ScalarProperty Name="ID_Place" ColumnName="ID_Place" />
+                <ScalarProperty Name="ID_Position" ColumnName="ID_Position" />
+                <ScalarProperty Name="DOC_VoteForm" ColumnName="DOC_VoteForm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

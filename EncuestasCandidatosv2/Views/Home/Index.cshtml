@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style type="text/css">
+ .enjoy-css {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 59px/1 Verdana, Geneva, sans-serif;
+  color: black;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+</style> 
+
+<div style="text-align:center">
+    <h1 class ="enjoy-css">Candidate's System</h1>
+
+   
+</div>
+
+<div style="text-align:center;">
+    <img class="fotovotar" src="http://cdn.skilledup.com/wp-content/uploads/2015/06/illustration-selecting-passive-candidate-Feature_1290x688_KL.jpg" alt="HTML5 Icon" style="width:850px;height:450px ;  border: black 20px solid;
+ max-width: 100%;   height: auto;"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Candidates", "Index", "Candidates")</h2>
+            <p>
+                En esta seccíón podrás dar de alta a los candidatos que participarán en la encuesta de popularidad
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Parties", "Index", "Parties")</h2>
+            <p>En esta sección podrás agregar los partidos a los que son pertenecientes los clientes</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Places", "Index", "Places")</h2>
+            <p>En esta seccíón podrás dar de alta las regiones, ciudades y estados en donde contenderan los candidatos por cierto puesto</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Positions", "Index", "Positions")</h2>
+            <p>En esta seccíón podrás dar de alta las posiciones por las que los candidatos contenderan</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>@Html.ActionLink("Votes", "Index", "Votes")</h2>
+            <p>En esta seccíón podrás votar por el candidato de tu preferencia al puesto y lugar que desees e insertar una nota acerca de él.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>
+
+
+
+
